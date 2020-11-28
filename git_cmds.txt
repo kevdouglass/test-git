@@ -1,51 +1,161 @@
 Basic Git command List - http://www.codebind.com/linux-tutoria... 
-Set Up Git: git config --global user.name "Your Name“
- git config --global user.email youremail@domain.com
 
+###############################################
+Set Up Git: 
+###############################################
+> git config --global user.name "Your Name“
+
+> git config --global user.email youremail@domain.com
+===============================================
+
+###############################################
 Commands to Know for initial setup
-git clone (url) 
-git add (file names) 
-git commit -m "(committed message) 
-git push -u origin master 
-git remote add origin master (url)
+###############################################
+/* Initialize a NEW Git Repository */
+git init			# initialize NEW Git repository from cmd line. This is used @ the begining of a project.
+git commit -m "(description)"	# Give your project a good description so you know what is happening.
+git add <filename1> <filename2> # add project files to NEW Git Repository.
+git remote add origin main(url) # where, (url) is the url of the new repository you have created. This is used @ the begining of a project.
+git commit -m "(message)"	# leave a message for what changes were made
+git push -u origin main
 
 
+
+/* Access a friend/ teamates repo */
+# Clone an existing repository for your own usage.
+git clone (url) 		# where (url) is github.com/<user_name>/<project_name>/ 
+				#		>> click "Code"-dropdown-button >> click "copy" (https). 
+
+
+/* Add files to your or your teammates repo */
+git add (file names) 		# (git add *) will add all files, git add .txt #Add all txt files, or git add -A # will add all files to staging
+git commit -m "(message)" 	# want your commits to be meaningful
+git status			# after a commit, please check to make sure files are ready to push to the repository. Many errors happen here for "untracked files" being changed
+git push -u origin master 	# will push your changes to repository
+
+/* When working with more than 1-person on one file */
+git fetch			# make sure you have changes/ if any were made while you were away
+git merge			# if changes occurred and you want to keep them.
+git pull 			# git pull == git fetch + git merge (one-liner)
+
+
+> git diff main origin/main	# check diff between 2 files
+> git checkout <branch>		# change the branch you are currently operating
+> git merge <branch>		# merge a branch to staging to reflect new allowed changes
+===============================================
+
+###############################################
+MERGE:
+###############################################
+# to merge a sub-branch such as "new-feature1" to main "aka Master branch," we need to be in the MAIN. if we 
+#	have a "Pre-MAIN staging area" and want to merge "new-feature1" to pre-staging before relaying to MAIN we would 
+> git branch <Pre-Staging-name>	# create the pre-staging branch
+> git checkout <Pre-Staging>	# checkout i.e. operate in our pre-staging area
+> git merge <new-feature1>	# now our <Pre-Staging-name> BRANCH will reflect ALL changes that were made in our <new-feature1> branch
+
+
+/* MERGE TO MAIN/ MASTER */
+> git checkout main
+# your main could be called "master" - to check enter "git status" in cmd line and first row says what your current branch is.
+# Now that we are operating in our MAIN branch, we want to merge our <new-feature> to reflect changes.
+> git merge <new-feature>
+===============================================
+
+
+
+
+
+###############################################
 Check LOG of changes:
+###############################################
 > git log
+===============================================
 
 
+
+###############################################
 Check BRANCH’s:
+###############################################
 > git branch
+===============================================
 
+
+###############################################
 Add new BRANCH:
+###############################################
 > git branch new-feature1
+===============================================
 
+
+###############################################
 # Checkout BRANCH's:
-# Checkout your new branch..
+###############################################
 > git checkout new-feature1
+===============================================
 
+
+###############################################
 Check LOG of changes:
-> git log
+###############################################
+> git log				# Show all changes on a branch
+> git reflog				# will show all changes we have made
+===============================================
 
 
+###############################################
+# Check file differences (used alot when attempting to MERGE and get conflicts)
+###############################################
+	
+> git fetch				# Fetch first to check for any updates
+					# then,
+> git diff README.md			# to check differences in files:
+> git diff --cached README.md
+# OR --
+> git diff main origin/main		# we can check differences between 2 changes:
+===============================================
 
 
+###############################################
 # IF I changed a file and want to restart for some reason..
+###############################################
 > git checkout <filname.py>
-	> # check status of changes
-	> git status
+	> 
+	> git status			# check status of changes
 	> # should say what branch we're on, also check changes:
-	> git diff
-	# will now see there are no changes and back to the way it was before, "fresh restart"
+	> git diff			# will now see there are no changes and back to the way it was before, "fresh restart"
+	
+# 	OR --
+> git log				# Show all changes on a branch
+#	Then,
+> git reset --soft 2e75207		# grab first 7 characters of hash from commit you want to change
+OUTPUT: this will put changes back into 'staging'. It keeps all changes and undo's the push to origin main
+# OR --
+> git reset --mixed 
 
 
 
 
-
+###############################################
 Common Mistakes and Undoing Bad Commits:
+#
+# Changes to be committed:
+#   (use "git restore --staged <file>..." to unstage)
+#         modified:   git_cmds.txt
+###############################################
+# Here will will unstage the git_cmds.txt file as I forgot to change something by using the git restore --staged <filename> cmd
+################################################
 
-COMMIT’s:
-If you accidently wrote a wrong commit… 
+> git restore --staged git_cmds.txt
+
+
+###############################################
+# change message on a COMMIT using "[git commit --amend -m "(message)"]"
+why: If you accidently wrote a wrong commit… ie a method of subtraction accidently wrote new method of addition.
    git commit –amend –m “Completed Subtract Function”
 If you forgot to add a file when committing:
 >> git commit --ammend
+
+ 
+# If you used git reset --hard and feel as if you needed some code/info/data that was removed. Still may be in luck..
+> git reflog
+# will show all changes we have made
