@@ -1,0 +1,51 @@
+Basic Git command List - http://www.codebind.com/linux-tutoria... 
+Set Up Git: git config --global user.name "Your Name“
+ git config --global user.email youremail@domain.com
+
+Commands to Know for initial setup
+git clone (url) 
+git add (file names) 
+git commit -m "(committed message) 
+git push -u origin master 
+git remote add origin master (url)
+
+
+Check LOG of changes:
+> git log
+
+
+Check BRANCH’s:
+> git branch
+
+Add new BRANCH:
+> git branch new-feature1
+
+# Checkout BRANCH's:
+# Checkout your new branch..
+> git checkout new-feature1
+
+Check LOG of changes:
+> git log
+
+
+
+
+# IF I changed a file and want to restart for some reason..
+> git checkout <filname.py>
+	> # check status of changes
+	> git status
+	> # should say what branch we're on, also check changes:
+	> git diff
+	# will now see there are no changes and back to the way it was before, "fresh restart"
+
+
+
+
+
+Common Mistakes and Undoing Bad Commits:
+
+COMMIT’s:
+If you accidently wrote a wrong commit… 
+   git commit –amend –m “Completed Subtract Function”
+If you forgot to add a file when committing:
+>> git commit --ammend
