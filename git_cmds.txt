@@ -39,6 +39,14 @@ git merge			# if changes occurred and you want to keep them.
 git pull 			# git pull == git fetch + git merge (one-liner)
 
 
+/* When Creating a NEW Branch: Do these */
+> git branch					# Check what your current branches are
+> git branch <new_feature>			# Make a NEW branch for a new feature
+*> git push --set-upstream origin <new_feature>	# make NEW branch accessible to other users && remote repository
+===============================================
+
+
+
 > git diff main origin/main	# check diff between 2 files
 > git checkout <branch>		# change the branch you are currently operating
 > git merge <branch>		# merge a branch to staging to reflect new allowed changes
@@ -77,6 +85,8 @@ Check LOG of changes:
 Check BRANCH’s:
 ###############################################
 > git branch
+> git branch <new_feature>			# make NEW branch for new feature
+> git push --set-upstream origin <new_feature>	# make NEW branch accessible to other users && remote repository
 ===============================================
 
 
